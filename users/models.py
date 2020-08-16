@@ -19,7 +19,8 @@ class User(AbstractUser):
     LANGUAGE_ENGLISH = "en"
     LANGUAGE_DUTCH = "nl"
 
-    LANGUAGE_CHOICES = ((LANGUAGE_ENGLISH, "English"), (LANGUAGE_DUTCH, "Dutch"))
+    LANGUAGE_CHOICES = ((LANGUAGE_ENGLISH, "English"),
+                        (LANGUAGE_DUTCH, "Dutch"))
 
     CURRENCY_USD = "usd"
     CURRENCY_EUR = "eur"
@@ -27,9 +28,12 @@ class User(AbstractUser):
     CURRENCY_CHOICES = ((CURRENCY_USD, "USD"), (CURRENCY_EUR, "EUR"))
 
     avatar = models.ImageField(upload_to="avatars", blank=True)
-    gender = models.CharField(choices=GENDER_CHOICES, max_length=10, blank=True)
+    gender = models.CharField(choices=GENDER_CHOICES,
+                              max_length=10, blank=True)
     bio = models.TextField(blank=True)
     birthdate = models.DateField(blank=True, null=True)
-    language = models.CharField(choices=LANGUAGE_CHOICES, max_length=2, blank=True)
-    currency = models.CharField(choices=CURRENCY_CHOICES, max_length=3, blank=True)
+    language = models.CharField(
+        choices=LANGUAGE_CHOICES, max_length=2, blank=True, default=LANGUAGE_ENGLISH)
+    currency = models.CharField(
+        choices=CURRENCY_CHOICES, max_length=3, blank=True, default=CURRENCY_EUR)
     superhost = models.BooleanField(default=False)
